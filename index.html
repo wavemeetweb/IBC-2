@@ -8,7 +8,6 @@
 </head>
 <body>
   <script>
-    // Redirect to login if not logged in
     if(sessionStorage.getItem('loggedIn') !== 'true') {
       window.location.href = 'login.html';
     }
@@ -29,15 +28,37 @@
       <input id="service" placeholder="Service" required />
       <input id="entryDate" type="date" required />
       <input id="returnDate" type="date" />
+      <select id="status">
+        <option value="Pending" selected>Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
       <button type="submit">Add Entry</button>
     </form>
 
-    <input id="searchInput" placeholder="Search by any field..." />
+    <div id="tabButtons" style="margin:20px 0;">
+      <button class="tab-btn active" data-status="Pending">Pending List</button>
+      <button class="tab-btn" data-status="Completed">Completed List</button>
+    </div>
+
+    <input id="searchInput" placeholder="Search by any field..." style="width: 100%; padding: 10px; margin-bottom: 15px;" />
 
     <button id="printBtn">Print List</button>
 
-    <div style="height: 600px; margin-top: 20px;">
-      <iframe id="sheetView" src="" width="100%" height="100%" style="border:none;"></iframe>
+    <div>
+      <table id="customerTable" border="1" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Service</th>
+            <th>Entry Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </section>
 
