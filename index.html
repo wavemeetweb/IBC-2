@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IBC Service Customer Details</title>
+  <title>IBC Service Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,52 +14,41 @@
   </script>
 
   <header>
-    <h1>IBC Service Customer Details</h1>
+    <h1>IBC Service</h1>
     <div>
-      Welcome, <strong>durga_mahapatra</strong> <button id="logoutBtn">Logout</button>
+      Welcome, <strong id="userDisplay"></strong>
+      <button id="logoutBtn">Logout</button>
     </div>
   </header>
 
   <section>
-    <form id="customerForm">
+    <form id="customerForm" autocomplete="off" style="margin-bottom: 15px;">
       <input id="name" placeholder="Name" required />
       <input id="email" placeholder="Email (optional)" type="email" />
       <input id="phone" placeholder="Phone" required />
       <input id="service" placeholder="Service" required />
       <input id="entryDate" type="date" required />
       <input id="returnDate" type="date" />
-      <select id="status">
-        <option value="Pending" selected>Pending</option>
-        <option value="Completed">Completed</option>
-      </select>
       <button type="submit">Add Entry</button>
     </form>
 
-    <div id="tabButtons" style="margin:20px 0;">
-      <button class="tab-btn active" data-status="Pending">Pending List</button>
-      <button class="tab-btn" data-status="Completed">Completed List</button>
+    <div id="tabButtons" style="margin: 20px 0;">
+      <button class="tab-btn active" data-status="Pending">Pending</button>
+      <button class="tab-btn" data-status="Completed">Completed</button>
     </div>
 
-    <input id="searchInput" placeholder="Search by any field..." style="width: 100%; padding: 10px; margin-bottom: 15px;" />
+    <input id="searchInput" placeholder="Search by any field..." />
 
-    <button id="printBtn">Print List</button>
-
-    <div>
-      <table id="customerTable" border="1" style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Service</th>
-            <th>Entry Date</th>
-            <th>Return Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    <button id="printBtn" style="margin: 10px 0;">Print List</button>
+    
+    <table id="customerTable" border="1" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Entry Date</th><th>Return Date</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </section>
 
   <script src="main.js"></script>
