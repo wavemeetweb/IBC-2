@@ -3,48 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IBC Service - Login</title>
+  <title>IBC Service Login</title>
   <style>
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      height: 100vh; display: flex; justify-content: center; align-items: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    .login-container {
-      background: rgba(255,255,255,0.95);
-      padding: 40px;
-      border-radius: 20px;
-      width: 340px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-    h1 { color: #333; margin: 0 0 30px; font-weight: 400; }
-    input {
-      width: 100%; margin: 10px 0;
-      padding: 13px; border-radius: 10px;
-      font-size: 17px; border: 2px solid #ddd;
-      transition: border-color 0.3s ease;
-    }
-    input:focus {
-      border-color: #667eea; outline: none;
-      background: white;
-      box-shadow: 0 0 8px rgba(102,126,234,0.2);
-    }
-    button {
-      margin-top: 20px; width: 100%;
-      padding: 16px 0; background: linear-gradient(135deg, #667eea, #764ba2);
-      border: none; border-radius: 12px; color: white;
-      font-size: 18px; font-weight: 600; cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    button:hover {
-      filter: brightness(110%);
-    }
-    .error {
-      color: #b00020; margin-top: 14px; font-weight: 600;
-      display: none;
-    }
+    body { margin:0;padding:0;font-family:sans-serif;height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);}
+    .login-container {background:white;padding:40px;border-radius:20px;width:340px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
+    h1 { color:#333;margin:0 0 28px;font-weight:400;}
+    input {width:100%;margin:10px 0;padding:13px;border-radius:10px;font-size:17px;border:2px solid #ddd;transition:border-color 0.3s;}
+    input:focus {border-color:#667eea;outline:none;background:white;box-shadow:0 0 8px rgba(102,126,234,0.2);}
+    button {margin-top:20px;width:100%;padding:16px 0;background:linear-gradient(135deg,#667eea,#764ba2);border:none;border-radius:12px;color:white;font-size:18px;font-weight:600;cursor:pointer;transition:all 0.3s;}
+    button:hover {filter:brightness(110%);}
+    .error {color:#b00020;margin-top:14px;font-weight:600;display:none;}
   </style>
 </head>
 <body>
@@ -57,7 +25,6 @@
       <div id="errorMsg" class="error">Invalid username or password</div>
     </form>
   </div>
-
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
