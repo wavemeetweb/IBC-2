@@ -1,18 +1,62 @@
-body { margin: 0; padding: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f2f5; color: #333;}
-header { display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px; font-size: 18px;}
-button { cursor: pointer; padding: 8px 15px; font-size: 15px; background: #667eea; color: white; border: none; border-radius: 6px;}
-button:hover { filter: brightness(1.1);}
-form { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;}
-form input {flex: 1 1 140px; padding: 9px 12px; font-size: 16px; border-radius: 6px; border:2px solid #ccc;transition: border-color 0.3s;}
-form input:focus { border-color: #667eea; outline: none;}
-#searchInput { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 2px solid #ccc; font-size: 16px;}
-#searchInput:focus { border-color: #667eea; outline: none;}
-.tab-btn { padding: 10px 20px; font-size: 16px; background: #eee; border: none; border-radius: 6px; margin-right: 8px; cursor: pointer;transition: background-color 0.3s;}
-.tab-btn.active { background-color: #667eea; color: white;}
-.tab-btn:hover { background: #ddd;}
-table { width: 100%; border-collapse: collapse; margin-top: 10px;}
-th, td { border: 1px solid #ddd; padding: 10px; text-align: left;}
-th { background-color: #e7eaf2;}
-table tr:hover { background-color: #f5f7fb;}
+body {
+  margin: 0; padding: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5; color: #333;
+}
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px; font-size: 18px;
+}
+header div {
+  display: flex; align-items: center; gap: 15px;
+}
+button {
+  cursor: pointer; padding: 8px 15px; font-size: 15px;
+  background: #667eea; color: white; border: none; border-radius: 6px;
+}
+button:hover {
+  filter: brightness(1.1);
+}
+form {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;
+}
+form input {
+  flex: 1 1 140px; padding: 9px 12px; font-size: 16px;
+  border: 2px solid #ccc; border-radius: 6px; transition: border-color 0.3s;
+}
+form input:focus {
+  border-color: #667eea; outline: none;
+}
+#searchInput {
+  width: 100%; padding: 10px; margin-bottom: 15px;
+  border: 2px solid #ccc; border-radius: 6px;
+  font-size: 16px;
+}
+#searchInput:focus {
+  border-color: #667eea; outline: none;
+}
+.tab-btn {
+  padding: 10px 20px; font-size: 16px; background:#eee;
+  border:none; border-radius:6px; cursor:pointer; margin-right:8px;
+  transition: background-color 0.3s;
+}
+.tab-btn.active {
+  background-color: #667eea; color: white;
+}
+.tab-btn:hover {
+  background: #ddd;
+}
+table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 10px;
+}
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+table th {
+  background-color: #f7f9fc;
+}
+table tr:hover {
+  background: #f2f6fc;
+}
