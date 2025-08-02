@@ -12,12 +12,17 @@
       window.location.href = 'login.html';
     }
   </script>
+
   <header>
     <h1>IBC Service</h1>
-    <div>Welcome, <strong id="userDisplay"></strong> <button id="logoutBtn">Logout</button></div>
+    <div>
+      Welcome, <span id="userDisplay"></span>
+      <button id="logoutBtn">Logout</button>
+    </div>
   </header>
+
   <section>
-    <form id="customerForm" autocomplete="off" style="margin-bottom: 15px;">
+    <form id="customerForm">
       <input id="name" placeholder="Name" required />
       <input id="email" placeholder="Email (optional)" type="email" />
       <input id="phone" placeholder="Phone" required />
@@ -26,22 +31,26 @@
       <input id="returnDate" type="date" />
       <button type="submit">Add Entry</button>
     </form>
-    <div id="tabButtons" style="margin: 20px 0;">
+
+    <div id="tabButtons" style="margin:20px 0;">
       <button class="tab-btn active" data-status="Pending">Pending</button>
       <button class="tab-btn" data-status="Completed">Completed</button>
     </div>
-    <input id="searchInput" placeholder="Search by any field..." />
+
+    <input id="searchInput" placeholder="Search entries..." />
+
     <button id="printBtn" style="margin: 10px 0;">Print List</button>
-    <table id="customerTable" border="1" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+
+    <table id="customerTable" style="width:100%; border-collapse: collapse; border:1px solid #ccc;">
       <thead>
         <tr>
-          <th>Name</th><th>Email</th><th>Phone</th><th>Service</th>
-          <th>Entry Date</th><th>Return Date</th><th>Status</th>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Entry Date</th><th>Return Date</th><th>Status</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
   </section>
+
   <script src="main.js"></script>
 </body>
 </html>
