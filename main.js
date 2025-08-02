@@ -1,24 +1,20 @@
-// --- CONFIGURATION ---
-// Your Google Form POST URL ending with `/formResponse`
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSf2Ld6SGcfTk98GGyZDqxlqhorGr2BbTblFpM-m7GjiP0fx0A/formResponse';
 
-// Your Google Form field entry IDs — replace with actual IDs from your Google Form inputs
+// Fill in with real entry IDs from your Google Form for each field!
 const GOOGLE_FORM_FIELDS = {
   name: 'entry.1850879627',
   service: 'entry.710044027',
   phone: 'entry.864139383',
   entryDate: 'entry.1058717687',
-  email: 'entry.1234567890',    // Replace with your email field entry ID
-  returnDate: 'entry.9876543210', // Replace with your return date field entry ID
-  status: 'entry.1396189706'      // Replace with your status field entry ID
+  email: 'entry.1234567890',    // CHANGE to your Email field's entry ID
+  returnDate: 'entry.9876543210', // CHANGE to your Return Date field's entry ID
+  status: 'entry.1396189706'      // CHANGE to your Status field's entry ID
 };
 
-// Your Google Sheet published CSV URL (File ➔ Publish to web ➔ Entire document ➔ CSV)
-// IMPORTANT: replace YOUR_SHEET_ID with the ID from your live Google Sheet
-const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/pub?output=csv';
+// Your published Google Sheet CSV URL (publish sheet to web as CSV format, then paste link here)
+const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSkJCR-zlwSIGXLZqQxeubhP2ztx47wXj8MTt53YMMMy7ipO0nZ7i7FD-X6bw73j5ADVoAPesqfJ7rO/pub?output=csv';
 
-// DOM elements
 const form = document.getElementById('customerForm');
 const logoutBtn = document.getElementById('logoutBtn');
 const printBtn = document.getElementById('printBtn');
@@ -31,29 +27,24 @@ let fullData = [];
 let filteredData = [];
 let currentStatus = 'Pending';
 
-// Escape HTML to prevent XSS
 function escapeHTML(text) {
   const div = document.createElement('div');
   div.textContent = text || '';
   return div.innerHTML;
 }
-
-// Parse CSV from Google Sheets
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',').map(h => h.trim());
   return lines.slice(1).map(line => {
+    // Basic comma-split (won't handle commas in values, but fine for simple sheets)
     const cells = line.split(',');
     const obj = {};
     headers.forEach((header, i) => (obj[header] = (cells[i] || '').trim()));
-    // Normalize some columns to empty string if missing
     obj.Email = obj.Email || '';
     obj['Return Date'] = obj['Return Date'] || '';
     return obj;
   });
 }
-
-// Load data from published Google Sheet CSV
 async function loadSheetData() {
   try {
     const res = await fetch(PUBLISHED_CSV_URL);
@@ -61,12 +52,10 @@ async function loadSheetData() {
     fullData = parseCSV(text);
     filterAndRender();
   } catch (error) {
-    alert('Failed to load data from Google Sheets. Check your published CSV URL and internet connection.');
+    alert('Failed to load data from Google Sheets. Make sure the sheet is published as CSV and public.');
     console.error(error);
   }
 }
-
-// Filter data according to search input and status tab
 function filterAndRender() {
   const term = searchInput.value.trim().toLowerCase();
   filteredData = fullData.filter(row => {
@@ -76,8 +65,6 @@ function filterAndRender() {
   });
   renderTable();
 }
-
-// Render filtered data into the HTML table
 function renderTable() {
   customerTableBody.innerHTML = '';
   if (filteredData.length === 0) {
@@ -99,27 +86,24 @@ function renderTable() {
   });
 }
 
-// Submit form data to Google Form
 form.addEventListener('submit', async e => {
   e.preventDefault();
-
   const data = {};
   data[GOOGLE_FORM_FIELDS.name] = form.name.value.trim();
   data[GOOGLE_FORM_FIELDS.service] = form.service.value.trim();
   data[GOOGLE_FORM_FIELDS.phone] = form.phone.value.trim();
   data[GOOGLE_FORM_FIELDS.entryDate] = form.entryDate.value;
-
   if (form.email.value.trim() && GOOGLE_FORM_FIELDS.email) {
     data[GOOGLE_FORM_FIELDS.email] = form.email.value.trim();
   }
   if (form.returnDate.value && GOOGLE_FORM_FIELDS.returnDate) {
     data[GOOGLE_FORM_FIELDS.returnDate] = form.returnDate.value;
   }
-
-  // Always set status as Pending by default, user does not select
+  // Always set status as Pending by default
   data[GOOGLE_FORM_FIELDS.status] = 'Pending';
 
-  if (!data[GOOGLE_FORM_FIELDS.name] || !data[GOOGLE_FORM_FIELDS.service] || !data[GOOGLE_FORM_FIELDS.phone] || !data[GOOGLE_FORM_FIELDS.entryDate]) {
+  if (!data[GOOGLE_FORM_FIELDS.name] || !data[GOOGLE_FORM_FIELDS.service] ||
+      !data[GOOGLE_FORM_FIELDS.phone] || !data[GOOGLE_FORM_FIELDS.entryDate]) {
     alert('Please fill in all required fields.');
     return;
   }
@@ -131,18 +115,15 @@ form.addEventListener('submit', async e => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(data).toString()
     });
-    alert('Entry submitted successfully! Please wait a few seconds for it to appear in the list.');
+    alert('Entry submitted successfully! Wait a few seconds for it to appear.');
     form.reset();
-
-    // Wait 3 seconds then reload the sheet data to show new entry
-    setTimeout(loadSheetData, 3000);
+    setTimeout(loadSheetData, 3000); // Wait 3s, then reload to fetch from sheet
   } catch (err) {
     alert('Failed to submit entry. Please try again.');
     console.error(err);
   }
 });
 
-// Tab buttons to toggle Pending/Completed
 tabButtons.forEach(button => {
   button.addEventListener('click', () => {
     tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -151,22 +132,13 @@ tabButtons.forEach(button => {
     filterAndRender();
   });
 });
-
-// Search input handler
 searchInput.addEventListener('input', filterAndRender);
-
-// Logout button
 logoutBtn.addEventListener('click', () => {
   sessionStorage.clear();
   window.location.href = 'login.html';
 });
+printBtn.addEventListener('click', () => window.print());
 
-// Print button
-printBtn.addEventListener('click', () => {
-  window.print();
-});
-
-// On page load, set username and load the sheet data
 document.addEventListener('DOMContentLoaded', () => {
   userDisplay.textContent = sessionStorage.getItem('username') || 'User';
   loadSheetData();
